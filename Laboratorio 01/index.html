@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Lab 01 - Procesamiento por Lotes</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="grid">
+
+    <!-- ═══════════════════════════════════
+         COLUMNA IZQUIERDA: integrantes
+    ═══════════════════════════════════ -->
+    <div class="col-izq">
+      <div class="stone-wrap s-integrantes">
+        <div class="stone stone-integrantes" id="panel-integrantes">
+          <p class="integrantes-titulo">Integrantes</p>
+          <ul class="integrantes-lista">
+            <li>Wendolin Valverde Zuñiga</li>
+            <li>Wilmer Perez Hernandez</li>
+            <li>Brandon Vega Ocampo</li>
+            <li>José A. Quiroz Padilla</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-main">
+
+      <!-- Fila de indicadores -->
+      <div class="row-indicadores">
+
+        <div class="stone-wrap ind">
+          <div class="stone stone-indicador">
+            <span class="label">Lote</span>
+            <span class="valor" id="lote-actual">—</span>
+          </div>
+        </div>
+
+        <div class="stone-wrap ind">
+          <div class="stone stone-indicador">
+            <span class="label">Pend.</span>
+            <span class="valor" id="lotes-pendientes">—</span>
+          </div>
+        </div>
+
+        <div class="stone-wrap ind">
+          <div class="stone stone-indicador">
+            <span class="label">Total</span>
+            <span class="valor" id="lotes-total">—</span>
+          </div>
+        </div>
+
+        <div class="stone-wrap ind">
+          <div class="stone stone-indicador">
+            <span class="label">Proceso</span>
+            <span class="valor" id="proceso-id">—</span>
+          </div>
+        </div>
+
+        <!-- NUEVO: Progreso de procesos completados (ej. 7/23) -->
+        <div class="stone-wrap ind">
+          <div class="stone stone-indicador">
+            <span class="label">Progreso</span>
+            <span class="valor" id="procesos-progreso">—</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Panel grande: tabla de procesos -->
+      <div class="stone-wrap s-sq">
+        <div class="stone" id="panel-principal">
+          <table id="tabla-lotes">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Lote</th>
+                <th>Op.</th>
+                <th>A</th>
+                <th>B</th>
+                <th>Tiempo</th>
+                <th>Estado</th>
+                <th>Resultado</th>
+              </tr>
+            </thead>
+            <tbody id="tabla-lotes-body">
+              <!-- filas generadas por JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- NUEVO: Barra de progreso de tiempo del proceso actual -->
+      <div class="stone-wrap s-barra" id="zona-barra">
+        <div class="stone stone-barra">
+          <span class="label" id="barra-label">Tiempo del proceso actual</span>
+          <div class="barra-fondo">
+            <div class="barra-relleno" id="barra-relleno" style="width: 0%"></div>
+            <span class="barra-texto" id="barra-texto">0 / 0 s</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Zona de mensajes (éxito / error / info) -->
+      <div class="stone-wrap s-msg" id="zona-mensaje">
+        <div class="stone stone-mensaje" id="panel-mensaje">
+          <span class="msg-icono" id="msg-icono">▶</span>
+          <span class="msg-texto" id="msg-texto">Listo para iniciar.</span>
+        </div>
+      </div>
+
+      <!-- NUEVO: Panel de resumen final (oculto hasta que termina todo) -->
+      <div class="stone-wrap s-resumen" id="zona-resumen" style="display:none;">
+        <div class="stone stone-resumen" id="panel-resumen">
+          <p class="resumen-titulo">▣ Resumen Final</p>
+          <div id="resumen-contenido" class="resumen-scroll">
+            <!-- generado por JS al finalizar -->
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ═══════════════════════════════════
+         COLUMNA DERECHA: input N + botones
+    ═══════════════════════════════════ -->
+    <div class="col-botones">
+
+      <!-- Input N -->
+      <div class="stone-wrap s-btn">
+        <div class="stone stone-input">
+          <span class="label">N:</span>
+          <input type="number" id="input-n" min="1" value="5" />
+        </div>
+      </div>
+
+      <button class="px-btn s-btn" id="btn-generar">
+        <div class="stone"><span>Generar</span></div>
+      </button>
+
+      <button class="px-btn s-btn" id="btn-guardar" disabled>
+        <div class="stone"><span>Guardar</span></div>
+      </button>
+
+      <button class="px-btn s-btn" id="btn-iniciar" disabled>
+        <div class="stone"><span>Iniciar</span></div>
+      </button>
+
+      <button class="px-btn s-btn" id="btn-reset">
+        <div class="stone"><span>Reiniciar</span></div>
+      </button>
+
+      <!-- NUEVO: Botón "Pausa final" — aparece solo al terminar todo -->
+      <button class="px-btn s-btn btn-fin" id="btn-fin" style="display:none;">
+        <div class="stone"><span>[ ENTER ]</span></div>
+      </button>
+
+    </div>
+
+  </div>
+
+</body>
+</html>

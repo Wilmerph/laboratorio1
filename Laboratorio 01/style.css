@@ -1,0 +1,380 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* ── Variables globales ─────────────────────────────────────────
+   Cambia un color aquí y se aplica en todo el CSS automáticamente
+──────────────────────────────────────────────────────────────── */
+:root {
+
+  /* Fuente */
+  --font: 'Press Start 2P', monospace;
+
+  /* Colores del panel (azul oscuro) */
+  --panel-bg:  #1e2050;
+  --panel-hi:  #3a3f80;   /* borde claro (arriba/izq = luz) */
+  --panel-sh:  #0d0f28;   /* borde oscuro (abajo/der = sombra) */
+  --panel-out: #010102;   /* borde exterior */
+
+  /* Colores del botón (azul más brillante) */
+  --btn-bg: #253090;
+  --btn-hi: #4858c8;
+  --btn-sh: #0a0e30;
+
+  /* Texto */
+  --text:  #e8e8ff;        /* texto principal */
+  --label: #8888cc;        /* texto secundario / labels */
+}
+
+/* ── Body y overlay ─────────────────────────────────────────── */
+body {
+  background: #0a0a1a url('\(n\)\ 1.png') no-repeat center center / cover fixed;
+  image-rendering: pixelated;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 36px 48px;
+  position: relative;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(6, 6, 20, 0.65);
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ── Layout ─────────────────────────────────────────────────── */
+.grid {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  gap: 20px;
+  width: 100%;
+  max-width: 1000px;
+  align-items: flex-start;
+}
+
+.col-main        { display: flex; flex-direction: column; gap: 14px; flex: 1; }
+.col-botones     { display: flex; flex-direction: column; gap: 10px; width: 130px; flex-shrink: 0; }
+.col-izq         { display: flex; flex-direction: column; width: 150px; flex-shrink: 0; }
+.row-indicadores { display: flex; gap: 10px; flex-wrap: wrap; }
+
+/* ── Tamaños de contenedores ────────────────────────────────── */
+.s-sq  { width: 100%; height: 500px; }
+.s-btn { width: 100%; height: 64px; }
+.s-msg { width: 100%; height: 44px; }
+.stone-wrap.ind  { flex: 1; min-width: 80px; height: 70px; }
+
+/* ── Caja pixel-art base ─────────────────────────────────────
+   .stone-wrap = marco exterior oscuro
+   .stone      = relleno interior con sombras de relieve
+──────────────────────────────────────────────────────────────── */
+.stone-wrap {
+  clip-path: var(--cut);
+  background: var(--panel-out);
+  padding: 3px;
+  display: inline-flex;
+  filter: drop-shadow(3px 3px 0px rgba(0,0,0,0.7));
+}
+
+.stone {
+  clip-path: var(--cut);
+  width: 100%;
+  height: 100%;
+  background: var(--panel-bg);
+  box-shadow:
+    inset  0    6px 0 0 var(--panel-hi),
+    inset  6px  0   0 0 var(--panel-hi),
+    inset  0   -6px 0 0 var(--panel-sh),
+    inset -6px  0   0 0 var(--panel-sh);
+}
+
+/* ── Botones ─────────────────────────────────────────────────── */
+.px-btn {
+  clip-path: var(--cut);
+  background: #131630;
+  padding: 3px;
+  display: inline-flex;
+  cursor: pointer;
+  border: none;
+  width: 100%;
+  filter: drop-shadow(3px 3px 0px rgba(0,0,0,0.7));
+  transition: filter 0.05s, transform 0.05s;
+}
+
+.px-btn .stone {
+  background: var(--btn-bg);
+  box-shadow:
+    inset  0    6px 0 0 var(--btn-hi),
+    inset  6px  0   0 0 var(--btn-hi),
+    inset  0   -6px 0 0 var(--btn-sh),
+    inset -6px  0   0 0 var(--btn-sh);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 10px;
+  transition: background 0.1s;
+}
+
+.px-btn:hover .stone  { background: #3040a0; }
+.px-btn:active        { transform: translate(2px, 2px); filter: drop-shadow(1px 1px 0 rgba(0,0,0,0.4)); }
+
+.px-btn .stone span {
+  font-family: var(--font);
+  font-size: 7px;
+  color: var(--text);
+  text-shadow: 2px 2px 0 #06082a;
+  white-space: nowrap;
+}
+
+/* ── Indicadores (Lote, Pend., Total…) ──────────────────────── */
+.stone-indicador {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.label {
+  font-family: var(--font);
+  font-size: 5px;
+  color: var(--label);
+  text-shadow: 1px 1px 0 #06082a;
+}
+
+.valor {
+  font-family: var(--font);
+  font-size: 10px;
+  color: var(--text);
+  text-shadow: 2px 2px 0 #06082a;
+}
+
+/* ── Panel integrantes ──────────────────────────────────────── */
+.stone-integrantes {
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.integrantes-titulo {
+  font-family: var(--font);
+  font-size: 5px;
+  color: var(--text);
+  text-align: center;
+  text-shadow: 1px 1px 0 #06082a;
+  border-bottom: 1px solid var(--panel-hi);
+  padding-bottom: 6px;
+  letter-spacing: 1px;
+}
+
+.integrantes-lista { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+
+.integrantes-lista li {
+  font-family: var(--font);
+  font-size: 4px;
+  color: var(--label);
+  text-shadow: 1px 1px 0 #06082a;
+  line-height: 1.6;
+}
+
+/* ── Input N ─────────────────────────────────────────────────── */
+.stone-input {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.stone-input .label { font-size: 6px; }
+
+.stone-input input {
+  font-family: var(--font);
+  font-size: 8px;
+  width: 70px;
+  text-align: center;
+  background: var(--panel-sh);
+  border: 2px solid var(--panel-hi);
+  color: var(--text);
+  outline: none;
+}
+
+/* ── Tabla de lotes ──────────────────────────────────────────── */
+#panel-principal {
+  overflow-y: auto;
+  padding: 12px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--panel-hi) var(--panel-sh);
+}
+
+#panel-principal::-webkit-scrollbar       { width: 8px; }
+#panel-principal::-webkit-scrollbar-track { background: var(--panel-sh); }
+#panel-principal::-webkit-scrollbar-thumb { background: var(--panel-hi); }
+
+#tabla-lotes {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font);
+  font-size: 6px;
+  color: #c8c8f0;
+}
+
+#tabla-lotes th {
+  padding: 8px 4px;
+  text-align: center;
+  border-bottom: 2px solid var(--panel-hi);
+  color: var(--text);
+  letter-spacing: 1px;
+}
+
+#tabla-lotes td              { padding: 7px 4px; text-align: center; border-bottom: 1px solid #1a1d40; }
+#tabla-lotes tbody tr:hover  { background: rgba(58, 63, 128, 0.3); }
+
+/* ── Zona de mensajes ────────────────────────────────────────── */
+.stone-mensaje {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 16px;
+}
+
+.msg-icono {
+  font-family: var(--font);
+  font-size: 8px;
+  color: var(--label);
+  flex-shrink: 0;
+}
+
+.msg-texto {
+  font-family: var(--font);
+  font-size: 6px;
+  color: var(--label);
+  text-shadow: 1px 1px 0 #06082a;
+}
+
+/* Estado éxito (verde) */
+#panel-mensaje.msg-exito {
+  background: #0d2a18;
+  box-shadow: inset 0 6px 0 0 #2a6a3a, inset 6px 0 0 0 #2a6a3a,
+              inset 0 -6px 0 0 #040e08, inset -6px 0 0 0 #040e08;
+}
+#panel-mensaje.msg-exito .msg-icono { color: #50dd70; }
+#panel-mensaje.msg-exito .msg-texto { color: #50dd70; text-shadow: 1px 1px 0 #031008; }
+
+/* Estado error (rojo) */
+#panel-mensaje.msg-error {
+  background: #2a0d0d;
+  box-shadow: inset 0 6px 0 0 #7a2020, inset 6px 0 0 0 #7a2020,
+              inset 0 -6px 0 0 #0e0404, inset -6px 0 0 0 #0e0404;
+}
+#panel-mensaje.msg-error .msg-icono { color: #ff5555; }
+#panel-mensaje.msg-error .msg-texto { color: #ff5555; text-shadow: 1px 1px 0 #100404; }
+
+/* Estado advertencia (amarillo) */
+#panel-mensaje.msg-warn {
+  background: #1e1a04;
+  box-shadow: inset 0 6px 0 0 #6a5a10, inset 6px 0 0 0 #6a5a10,
+              inset 0 -6px 0 0 #0a0800, inset -6px 0 0 0 #0a0800;
+}
+#panel-mensaje.msg-warn .msg-icono { color: #ffd040; }
+#panel-mensaje.msg-warn .msg-texto { color: #ffd040; text-shadow: 1px 1px 0 #100a00; }
+
+/* ── Barra de progreso de tiempo ─────────────────────────────── */
+.s-barra { width: 100%; height: 54px; }
+
+.stone-barra {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+  padding: 0 16px;
+}
+
+.stone-barra .label { font-size: 5px; }
+
+.barra-fondo {
+  position: relative;
+  width: 100%;
+  height: 12px;
+  background: var(--panel-sh);
+  border: 2px solid var(--panel-hi);
+  overflow: hidden;
+}
+
+.barra-relleno {
+  height: 100%;
+  background: #4858c8;
+  box-shadow: inset 0 3px 0 0 #7080ff, inset 0 -3px 0 0 #1a2060;
+  transition: width 1s linear;
+}
+
+.barra-texto {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font);
+  font-size: 5px;
+  color: var(--text);
+  text-shadow: 1px 1px 0 #06082a;
+}
+
+/* ── Panel resumen final ─────────────────────────────────────── */
+.s-resumen { width: 100%; height: 200px; }
+
+.stone-resumen {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px;
+}
+
+.resumen-titulo {
+  font-family: var(--font);
+  font-size: 7px;
+  color: #ffd040;
+  text-shadow: 1px 1px 0 #06082a;
+  border-bottom: 2px solid #6a5a10;
+  padding-bottom: 6px;
+  letter-spacing: 1px;
+}
+
+.resumen-scroll {
+  overflow-y: auto;
+  flex: 1;
+  scrollbar-width: thin;
+  scrollbar-color: var(--panel-hi) var(--panel-sh);
+  font-family: var(--font);
+  font-size: 5px;
+  color: var(--label);
+  line-height: 2;
+}
+
+.resumen-scroll::-webkit-scrollbar       { width: 6px; }
+.resumen-scroll::-webkit-scrollbar-track { background: var(--panel-sh); }
+.resumen-scroll::-webkit-scrollbar-thumb { background: var(--panel-hi); }
+
+/* ── Botón fin (pausa final) ─────────────────────────────────── */
+.btn-fin .stone {
+  background: #1e1a04 !important;
+  box-shadow:
+    inset  0    6px 0 0 #6a5a10,
+    inset  6px  0   0 0 #6a5a10,
+    inset  0   -6px 0 0 #0a0800,
+    inset -6px  0   0 0 #0a0800 !important;
+  animation: parpadeo 1s step-start infinite;
+}
+
+.btn-fin .stone span { color: #ffd040 !important; }
+
+@keyframes parpadeo {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.3; }
+}
