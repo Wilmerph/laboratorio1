@@ -3,7 +3,7 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 /* ── Variables globales ─────────────────────────────────────────
-   Cambia un color aquí y se aplica en todo el CSS automáticamente
+   Cambia un color aquí y se aplica en todo el CSS automáticamente es un poco ams comodo
 ──────────────────────────────────────────────────────────────── */
 :root {
 
@@ -59,15 +59,15 @@ body::before {
 }
 
 .col-main        { display: flex; flex-direction: column; gap: 14px; flex: 1; }
-.col-botones     { display: flex; flex-direction: column; gap: 10px; width: 130px; flex-shrink: 0; }
-.col-izq         { display: flex; flex-direction: column; width: 150px; flex-shrink: 0; }
+.col-botones     { display: flex; flex-direction: column; gap: 10px; width: 150px; flex-shrink: 0; }
+.col-izq         { display: flex; flex-direction: column; width: 185px; flex-shrink: 0; }
 .row-indicadores { display: flex; gap: 10px; flex-wrap: wrap; }
 
 /* ── Tamaños de contenedores ────────────────────────────────── */
 .s-sq  { width: 100%; height: 500px; }
-.s-btn { width: 100%; height: 64px; }
-.s-msg { width: 100%; height: 44px; }
-.stone-wrap.ind  { flex: 1; min-width: 80px; height: 70px; }
+.s-btn { width: 100%; height: 76px; }
+.s-msg { width: 100%; height: 56px; }
+.stone-wrap.ind  { flex: 1; min-width: 90px; height: 88px; }
 
 /* ── Caja pixel-art base ─────────────────────────────────────
    .stone-wrap = marco exterior oscuro
@@ -125,7 +125,7 @@ body::before {
 
 .px-btn .stone span {
   font-family: var(--font);
-  font-size: 7px;
+  font-size: 10px;
   color: var(--text);
   text-shadow: 2px 2px 0 #06082a;
   white-space: nowrap;
@@ -142,14 +142,14 @@ body::before {
 
 .label {
   font-family: var(--font);
-  font-size: 5px;
+  font-size: 8px;
   color: var(--label);
   text-shadow: 1px 1px 0 #06082a;
 }
 
 .valor {
   font-family: var(--font);
-  font-size: 10px;
+  font-size: 15px;
   color: var(--text);
   text-shadow: 2px 2px 0 #06082a;
 }
@@ -164,7 +164,7 @@ body::before {
 
 .integrantes-titulo {
   font-family: var(--font);
-  font-size: 5px;
+  font-size: 8px;
   color: var(--text);
   text-align: center;
   text-shadow: 1px 1px 0 #06082a;
@@ -177,7 +177,7 @@ body::before {
 
 .integrantes-lista li {
   font-family: var(--font);
-  font-size: 4px;
+  font-size: 7px;
   color: var(--label);
   text-shadow: 1px 1px 0 #06082a;
   line-height: 1.6;
@@ -192,11 +192,11 @@ body::before {
   gap: 6px;
 }
 
-.stone-input .label { font-size: 6px; }
+.stone-input .label { font-size: 9px; }
 
 .stone-input input {
   font-family: var(--font);
-  font-size: 8px;
+  font-size: 11px;
   width: 70px;
   text-align: center;
   background: var(--panel-sh);
@@ -221,7 +221,7 @@ body::before {
   width: 100%;
   border-collapse: collapse;
   font-family: var(--font);
-  font-size: 6px;
+  font-size: 9px;
   color: #c8c8f0;
 }
 
@@ -246,14 +246,14 @@ body::before {
 
 .msg-icono {
   font-family: var(--font);
-  font-size: 8px;
+  font-size: 11px;
   color: var(--label);
   flex-shrink: 0;
 }
 
 .msg-texto {
   font-family: var(--font);
-  font-size: 6px;
+  font-size: 9px;
   color: var(--label);
   text-shadow: 1px 1px 0 #06082a;
 }
@@ -286,7 +286,7 @@ body::before {
 #panel-mensaje.msg-warn .msg-texto { color: #ffd040; text-shadow: 1px 1px 0 #100a00; }
 
 /* ── Barra de progreso de tiempo ─────────────────────────────── */
-.s-barra { width: 100%; height: 54px; }
+.s-barra { width: 100%; height: 68px; }
 
 .stone-barra {
   display: flex;
@@ -296,12 +296,12 @@ body::before {
   padding: 0 16px;
 }
 
-.stone-barra .label { font-size: 5px; }
+.stone-barra .label { font-size: 8px; }
 
 .barra-fondo {
   position: relative;
   width: 100%;
-  height: 12px;
+  height: 16px;
   background: var(--panel-sh);
   border: 2px solid var(--panel-hi);
   overflow: hidden;
@@ -321,7 +321,7 @@ body::before {
   align-items: center;
   justify-content: center;
   font-family: var(--font);
-  font-size: 5px;
+  font-size: 8px;
   color: var(--text);
   text-shadow: 1px 1px 0 #06082a;
 }
@@ -338,7 +338,7 @@ body::before {
 
 .resumen-titulo {
   font-family: var(--font);
-  font-size: 7px;
+  font-size: 10px;
   color: #ffd040;
   text-shadow: 1px 1px 0 #06082a;
   border-bottom: 2px solid #6a5a10;
@@ -352,7 +352,7 @@ body::before {
   scrollbar-width: thin;
   scrollbar-color: var(--panel-hi) var(--panel-sh);
   font-family: var(--font);
-  font-size: 5px;
+  font-size: 8px;
   color: var(--label);
   line-height: 2;
 }
